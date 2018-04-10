@@ -1,7 +1,25 @@
 "# webdriverio-with-page-objects" 
 
+<a href="https://medium.com/@acoyfellow/mass-linkedin-request-without-3rd-party-software-dff998aedd23">Template for Social Media Automation</a>
+
+
 <a href="http://www.webdriverjs.com/a-basic-example-for-webdriverio-test/">Prerequisites - Install and run selenium-standalone in the background</a>
 
 cd into the directory and run:
 
 node ./test/specs/WithoutWdioClient.js
+
+How to Run?
+Run the below command in CommandPrompt/Terminal to install selenium server utility.
+
+npm install -g selenium-standalone
+Run the below command in CommandPrompt/Terminal to update selenium standalone server and browser drivers to latest versions.
+
+selenium-standalone install
+Run the below command in CommandPrompt/Terminal to run selenium server.
+
+selenium-standalone start
+Open a new CommandPrompt/Terminal and run the below command to execute WebdriverIo test.
+
+node ./test/specs/WithoutWdioClient.js
+You should see a browser opened and navigated to google website and closed. It’s very quick.
