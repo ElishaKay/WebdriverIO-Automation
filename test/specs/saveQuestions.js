@@ -20,6 +20,15 @@ var QuestionsPage = require('../pageObjects/questionsPage');
 
 browser.url('http://tqen.mot.gov.il/know-your-vehicle?start=80') 
 
+function wait(ms){
+					   var start = new Date().getTime();
+					   var end = start;
+					   while(end < start + ms) {
+					     end = new Date().getTime();
+					  }
+					}
+
+wait(5000);
 // var questions = browser.elements('.jcepopup');
 
 // // var closeBtn = ('#jcemediabox-popup-closelink');
@@ -62,19 +71,11 @@ var result = browser.execute(function() {
          	
  	        	list[i].click();
 
- 	        	function wait(ms){
-					   var start = new Date().getTime();
-					   var end = start;
-					   while(end < start + ms) {
-					     end = new Date().getTime();
-					  }
-					}
-
-				// wait(2000);
+ 	        	
 			var questionText = list[i].innerText;
 			console.log('this is the questionText',questionText);
 			var substr = questionText.substring(1, 5);
-			console.log('this is the substr',substr);
+			console.log('this is the substr',subst);
 			
 
 			var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
