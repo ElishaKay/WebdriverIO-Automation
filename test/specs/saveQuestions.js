@@ -2,13 +2,19 @@ var webdriverio = require('webdriverio');
 
 var options = {
     desiredCapabilities: {
-        browserName: 'mozilla' //Browser choice
+        browserName: 'chrome' //Browser choice
     }
 };
 
 browser = webdriverio
     .remote(options) //Passing configurations
     .init() // Initiating webdriverIo
+
+ browser.timeouts({
+        "script": 999990,
+        "pageLoad": 999990,
+        "implicit": 999990
+});
 
 var QuestionsPage = require('../pageObjects/questionsPage');
 
@@ -46,14 +52,15 @@ browser.url('http://tqen.mot.gov.il/know-your-vehicle?start=80')
 
 
 var result = browser.execute(function() {
+    setInterval(function(){
     var list = document.getElementsByClassName("jcepopup");
     console.log('this is the list array', list);
     var newList = [];
     for (i = 0; i < 1; i++) { 
          	// eventFire(list[i], 'click');
          	// setInterval(function() {
+         	
  	        	list[i].click();
-				
 
  	        	function wait(ms){
 					   var start = new Date().getTime();
@@ -63,14 +70,22 @@ var result = browser.execute(function() {
 					  }
 					}
 
-				wait(5000);
-				   
-         	console.log('this is the text of question #',i,': ',list[i].innerText);
-         	var questionText = list[i].innerText;
+				// wait(2000);
+			var questionText = list[i].innerText;
+			console.log('this is the questionText',questionText);
+			var substr = questionText.substring(1, 5);
+			console.log('this is the substr',substr);
+			
+
+			var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
+			console.log('this is the correctAnswerBtn', correctAnswerBtn);
+         	
          	newList.push(questionText);
-    		//   
+         	
+         	//   
 		}
     // browser context - you may not access client or console
+    }, 5000);
     return newList;
  	});
 
