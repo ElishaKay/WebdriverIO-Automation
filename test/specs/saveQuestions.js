@@ -31,7 +31,7 @@ function wait(ms){
 wait(15000);
 
 var result = browser.execute(function() {
-    setInterval(function(){
+    var saveQLoop = setInterval(function(){
     var list = document.getElementsByClassName("jcepopup");
     console.log('this is the list array', list);
     var newList = [];
@@ -60,33 +60,15 @@ var result = browser.execute(function() {
          	//   
 		}
 	console.log('this is the questions and answer array', newList);
+	clearInterval(saveQLoop);
     // browser context - you may not access client or console
     }, 5000);
     return newList;
  	});
 
-//     // node.js context - client and console are available
-// result.then(function (questionsArray) {
-//     console.log('this is the list printed in node cli',questionsArray);
-//     for (i = 0; i < questionsArray.length; i++) { 
-//     		  questionsArray[i].click;
-// 			  // method to be executed;
-			
-
-// 	   //  	    setInterval(function() {
-// 				//     var close = document.getElementById('jcemediabox-popup-closelink');
-// 	   //  			close.click();				  // method to be executed;
-// 				// }, 5000);   	
-
-
-//          	// eventFire(list[i], 'click');
-//          	console.log('this is the text of question #',i,': ',questionsArray[i].innerText);
-//          	// var closeBtn = ('#jcemediabox-popup-closelink')
-
-// 			// closeBtn.waitForVisible(3000);
-//          	// closeBtn.click();
-// 		}
-
-// });
+    // node.js context - client and console are available
+result.then(function (qAndAArray) {
+    console.log('this is the list printed in node cli',qAndAArray);
+});
 
 // // browser.end();
