@@ -29,7 +29,7 @@ function wait(ms){
 					}
 
 wait(15000);
-// var questions = browser.elements('.jcepopup');
+// var questions = browser.elements('.jcepopup'); comment
 
 // questions.waitForExist(15000);
 
