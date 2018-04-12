@@ -29,45 +29,13 @@ function wait(ms){
 					}
 
 wait(15000);
-// var questions = browser.elements('.jcepopup'); comment
-
-// questions.waitForExist(15000);
-
-// // var closeBtn = ('#jcemediabox-popup-closelink');
-
-
-// var correctAnswerBtn = browser.element("#jsn-content-popup > div > div > div > div > div > span:nth-child(2) > button");
-
-// correctAnswerBtn.waitForExist(5000);
-
-// console.log('this is the correctAnswerBtn', correctAnswerBtn);
-         	
-
-
-// questions.then(function (questionsArray) {
-//     console.log('this is the browser.elements list',questionsArray);
-//     for (i = 0; i < questionsArray.length; i++) { 
-//          	// eventFire(list[i], 'click');
-//          	questionsArray[i].click();
-//          	var correct = ("#jsn-content-popup > div > div > div > div > div > span:nth-child(2) > button");
-//          	correct.then(function (correctAnswerBtn) {
-//          		correctAnswerBtn.click();
-//          	});
-//          	// var closeBtn = ('#jcemediabox-popup-closelink')
-//          	// browser.timeoutsImplicitWait(3000);
-// 			// closeBtn.waitForVisible(3000);
-//          	// closeBtn.click();
-//          	console.log('this is the text of question #',i,': ',questionsArray[i].innerText);
-         	
-// }});
-
 
 var result = browser.execute(function() {
     setInterval(function(){
     var list = document.getElementsByClassName("jcepopup");
     console.log('this is the list array', list);
     var newList = [];
-    for (i = 0; i < 1; i++) { 
+    for (i = 0; i < list.length; i++) { 
          	// eventFire(list[i], 'click');
          	// setInterval(function() {
          	
