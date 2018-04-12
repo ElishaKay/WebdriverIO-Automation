@@ -20,49 +20,7 @@ var QuestionsPage = require('../pageObjects/questionsPage');
 
 browser.url('http://tqen.mot.gov.il/know-your-vehicle?start=80') 
 
-// var questions = browser.elements('.jcepopup');
-
-// // var closeBtn = ('#jcemediabox-popup-closelink');
-
-
-// var correctAnswerBtn = browser.element("#jsn-content-popup > div > div > div > div > div > span:nth-child(2) > button");
-
-// correctAnswerBtn.waitForExist(5000);
-
-// console.log('this is the correctAnswerBtn', correctAnswerBtn);
-         	
-
-
-// questions.then(function (questionsArray) {
-//     console.log('this is the browser.elements list',questionsArray);
-//     for (i = 0; i < questionsArray.length; i++) { 
-//          	// eventFire(list[i], 'click');
-//          	questionsArray[i].click();
-//          	var correct = ("#jsn-content-popup > div > div > div > div > div > span:nth-child(2) > button");
-//          	correct.then(function (correctAnswerBtn) {
-//          		correctAnswerBtn.click();
-//          	});
-//          	// var closeBtn = ('#jcemediabox-popup-closelink')
-//          	// browser.timeoutsImplicitWait(3000);
-// 			// closeBtn.waitForVisible(3000);
-//          	// closeBtn.click();
-//          	console.log('this is the text of question #',i,': ',questionsArray[i].innerText);
-         	
-// }});
-
-
-var result = browser.execute(function() {
-    setInterval(function(){
-    var list = document.getElementsByClassName("jcepopup");
-    console.log('this is the list array', list);
-    var newList = [];
-    for (i = 0; i < 1; i++) { 
-         	// eventFire(list[i], 'click');
-         	// setInterval(function() {
-         	
- 	        	list[i].click();
-
- 	        	function wait(ms){
+function wait(ms){
 					   var start = new Date().getTime();
 					   var end = start;
 					   while(end < start + ms) {
@@ -70,20 +28,38 @@ var result = browser.execute(function() {
 					  }
 					}
 
-				// wait(2000);
+wait(15000);
+
+var result = browser.execute(function() {
+    setInterval(function(){
+    var list = document.getElementsByClassName("jcepopup");
+    console.log('this is the list array', list);
+    var newList = [];
+    for (i = 0; i < list.length; i++) { 
+         	// eventFire(list[i], 'click');
+         	// setInterval(function() {
+         	
+ 	        	list[i].click();
+
+ 	        	
 			var questionText = list[i].innerText;
 			console.log('this is the questionText',questionText);
-			var substr = questionText.substring(1, 5);
+			var substr = questionText.substring(0, 4);
 			console.log('this is the substr',substr);
 			
 
 			var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
 			console.log('this is the correctAnswerBtn', correctAnswerBtn);
-         	
-         	newList.push(questionText);
+
+			answerText = correctAnswerBtn.innerText;
+       		
+       		var qAndAObj = {"question": questionText, "answer": answerText};
+
+         	newList.push(qAndAObj);
          	
          	//   
 		}
+	console.log('this is the questions and answer array', newList);
     // browser context - you may not access client or console
     }, 5000);
     return newList;
