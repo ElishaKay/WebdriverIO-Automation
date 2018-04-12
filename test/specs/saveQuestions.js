@@ -28,8 +28,10 @@ function wait(ms){
 					  }
 					}
 
-wait(5000);
+wait(15000);
 // var questions = browser.elements('.jcepopup');
+
+// questions.waitForExist(15000);
 
 // // var closeBtn = ('#jcemediabox-popup-closelink');
 
@@ -74,17 +76,22 @@ var result = browser.execute(function() {
  	        	
 			var questionText = list[i].innerText;
 			console.log('this is the questionText',questionText);
-			var substr = questionText.substring(1, 5);
-			console.log('this is the substr',subst);
+			var substr = questionText.substring(0, 4);
+			console.log('this is the substr',substr);
 			
 
 			var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
 			console.log('this is the correctAnswerBtn', correctAnswerBtn);
-         	
-         	newList.push(questionText);
+
+			answerText = correctAnswerBtn.innerText;
+       		
+       		var qAndAObj = {"question": questionText, "answer": answerText};
+
+         	newList.push(qAndAObj);
          	
          	//   
 		}
+	console.log('this is the questions and answer array', newList);
     // browser context - you may not access client or console
     }, 5000);
     return newList;
