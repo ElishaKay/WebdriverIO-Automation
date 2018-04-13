@@ -95,46 +95,52 @@ var result = browser.execute(function() {
 	 } ,2500);
 	  }
 	})();
+	// End of latest jquery injection
 
-    var saveQLoop = setInterval(function(){
-    var list = document.getElementsByClassName("jcepopup");
-    console.log('this is the list array', list);
-    var newList = [];
-    for (i = 0; i < list.length; i++) { 
-         	// eventFire(list[i], 'click');
-         	// setInterval(function() {
-         	
- 	        	list[i].click();
+	
+	var pages = document.getElementsByClassName("navigation-page");
+	console.log('these are the elements which hold links to all the page',pages);
+	
+	var pageLink = pages[0].innerHTML;
 
- 	        	
-			var questionText = list[i].innerText;
-			console.log('this is the questionText',questionText);
-			var substr = questionText.substring(0, 4);
-			console.log('this is the substr',substr);
-			
+	var loopAndSave = function (){
+			var saveQLoop = setInterval(function(){
+		    var list = document.getElementsByClassName("jcepopup");
+		    console.log('this is the list array', list);
+		    var newList = [];
+		    for (i = 0; i < list.length; i++) { 
+		      	
+		 	      	list[i].click();
+		      	
+					var questionText = list[i].innerText;
+					console.log('this is the questionText',questionText);
+					var substr = questionText.substring(0, 4);
+					console.log('this is the substr',substr);
+					
+					var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
+					console.log('this is the correctAnswerBtn', correctAnswerBtn);
 
-			var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
-			console.log('this is the correctAnswerBtn', correctAnswerBtn);
+					answerText = correctAnswerBtn.innerText;
+		       		var qAndAObj = {"question": questionText, "answer": answerText};
 
-			answerText = correctAnswerBtn.innerText;
-       		
-       		var qAndAObj = {"question": questionText, "answer": answerText};
+		         	newList.push(qAndAObj);
+				}
 
-         	newList.push(qAndAObj);
-         	
-         	//   
-		}
-	console.log('this is the questions and answer array', newList);
-	$.post( "http://localhost/api/drivingquestions", 
-		  { 'theQuestions': newList },
-		function(   data ) {
-		  console.log(data);
-	});
-	clearInterval(saveQLoop);
+			console.log('this is the questions and answer array', newList);
+			$.post( "http://localhost/api/drivingquestions", 
+				  { 'theQuestions': newList },
+				function(   data ) {
+				  console.log(data);
+			});
+			window.location.replace("http://stackoverflow.com");
+			// clearInterval(saveQLoop);
     // browser context - you may not access client or console
     }, 5000);
     return newList;
- 	});
+ 	};
+
+    loopAndSave();
+});
 
     // node.js context - client and console are available
 result.then(function (qAndAArray) {
