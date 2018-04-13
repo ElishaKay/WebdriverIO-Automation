@@ -18,7 +18,7 @@ browser = webdriverio
 
 var QuestionsPage = require('../pageObjects/questionsPage');
 
-browser.url('http://tqen.mot.gov.il/know-your-vehicle?start=80') 
+browser.url('http://tqen.mot.gov.il/safety') 
 
 function wait(ms){
 					   var start = new Date().getTime();
@@ -102,6 +102,12 @@ var result = browser.execute(function() {
 	console.log('these are the elements which hold links to all the page',pages);
 	
 	var pageLink = pages[0].innerHTML;
+	console.log(pageLink);
+
+	for (i = 0; i < pages.length; i++) { 
+		var pageLink = pages[i].innerHTML;
+		console.log(pageLink);
+	}
 
 	var loopAndSave = function (){
 			var saveQLoop = setInterval(function(){
@@ -124,6 +130,14 @@ var result = browser.execute(function() {
 		       		var qAndAObj = {"question": questionText, "answer": answerText};
 
 		         	newList.push(qAndAObj);
+
+		         	function simulateESCKeyPress() {
+					  jQuery.event.trigger({ type : 'keypress', which : 27 });
+					}
+
+					$(function() {
+					  simulateESCKeyPress();
+					});
 				}
 
 			console.log('this is the questions and answer array', newList);
