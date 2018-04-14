@@ -16,6 +16,12 @@ browser = webdriverio
         "implicit": 999990
 });
 
+var counter = 0;
+var browserRunning = setInterval(function(){
+	console.log('browser runnning ', counter, 'seconds');
+	counter++;
+}, 1000);
+
 var QuestionsPage = require('../pageObjects/questionsPage');
 
 browser.url('http://tqen.mot.gov.il/safety') 
@@ -98,63 +104,55 @@ var result = browser.execute(function() {
 	// End of latest jquery injection
 
 	
-	var pages = document.getElementsByClassName("navigation-page");
-	console.log('these are the elements which hold links to all the page',pages);
-	
-	var pageLink = pages[0].innerHTML;
-	console.log(pageLink);
 
-	for (i = 0; i < pages.length; i++) { 
-		var pageLink = pages[i].innerHTML;
-		console.log(pageLink);
+	function wait(ms){
+	   	var start = new Date().getTime();
+	  	var end = start;
+		while(end < start + ms) {
+		end = new Date().getTime();
+		}
 	}
 
-	var loopAndSave = function (){
-			var saveQLoop = setInterval(function(){
-		    var list = document.getElementsByClassName("jcepopup");
-		    console.log('this is the list array', list);
-		    var newList = [];
-		    for (i = 0; i < list.length; i++) { 
-		      	
-		 	      	list[i].click();
-		      	
-					var questionText = list[i].innerText;
-					console.log('this is the questionText',questionText);
-					var substr = questionText.substring(0, 4);
-					console.log('this is the substr',substr);
-					
-					var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
-					console.log('this is the correctAnswerBtn', correctAnswerBtn);
+		var questionCount = 0;
+		var list = document.getElementsByClassName("jcepopup");
+		console.log('this is the list array', list);
+		var newList = [];
 
-					answerText = correctAnswerBtn.innerText;
-		       		var qAndAObj = {"question": questionText, "answer": answerText};
+		var saveQLoop = setInterval(function(){
+				list[questionCount].click();
+				
+				wait(1000);
+				var questionText = list[questionCount].innerText;
+				console.log('this is the questionText',questionText);
+				var substr = questionText.substring(0, 4);
+				console.log('this is the substr',substr);
+						
+				var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
+				console.log('this is the correctAnswerBtn', correctAnswerBtn);
 
-		         	newList.push(qAndAObj);
+				answerText = correctAnswerBtn.innerText;
+				var qAndAObj = {"question": questionText, "answer": answerText};
 
-		         	function simulateESCKeyPress() {
-					  jQuery.event.trigger({ type : 'keypress', which : 27 });
-					}
+				newList.push(qAndAObj);
+				var openQuestions = document.querySelectorAll("#jcemediabox-popup-page");
+				console.log(openQuestions);
+				wait(1000);
+				openQuestions[0].remove();
+				var closeBtn = document.getElementById("jcemediabox-popup-closelink");
+				console.log('this is the closeBtn',closeBtn);
+				closeBtn.click();
 
-					$(function() {
-					  simulateESCKeyPress();
-					});
+				questionCount +=1;
+				console.log('added one to questionCount', questionCount);
+				console.log(newList);
+				if(questionCount ==5){
+					clearInterval(saveQLoop);
 				}
 
-			console.log('this is the questions and answer array', newList);
-			$.post( "http://localhost/api/drivingquestions", 
-				  { 'theQuestions': newList },
-				function(   data ) {
-				  console.log(data);
-			});
-			window.location.replace("http://stackoverflow.com");
-			// clearInterval(saveQLoop);
-    // browser context - you may not access client or console
-    }, 5000);
-    return newList;
- 	};
+			}, 3000);
+	    return newList;
 
-    loopAndSave();
-});
+	});
 
     // node.js context - client and console are available
 result.then(function (qAndAArray) {
@@ -162,3 +160,24 @@ result.then(function (qAndAArray) {
 });
 
 // // browser.end();
+
+// console.log('this is the questions and answer array', newList);
+// 			$.post( "http://localhost/api/drivingquestions", 
+// 				  { 'theQuestions': newList },
+// 				function(   data ) {
+// 				  console.log(data);
+// 			});
+
+// window.location.replace("http://stackoverflow.com");
+
+
+	// var pages = document.getElementsByClassName("navigation-page");
+	// console.log('these are the elements which hold links to all the page',pages);
+	
+	// var pageLink = pages[0].innerHTML;
+	// console.log(pageLink);
+
+	// for (i = 0; i < pages.length; i++) { 
+	// 	var pageLink = pages[i].innerHTML;
+	// 	console.log(pageLink);
+	// }
