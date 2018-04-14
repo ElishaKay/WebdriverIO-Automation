@@ -22,13 +22,10 @@ app.use(function(req, res, next) {
     //posting the list of questions from driving-tests site 
     app.post('/api/drivingquestions', function(req,res){
         console.log(req.body);
-        // if (typeof req.user!=='undefined'){
-        //          connection.query('INSERT INTO message (message_sent_date, message_content, client_id) VALUES (NOW(),"'+req.body.message+'","' +req.user.client_id+'")');
-        //         console.log("found req.user.client_id");
-        //     } else {
-        //         connection.query('INSERT INTO message (message_sent_date, message_content) VALUES (NOW(),"'+req.body.message+'")');
-        //         console.log("didnt finnd req.user");
-        //     };
+        console.log(req.body.img);
+             connection.query('INSERT INTO question (question_save_date, question_id, question, answer, img, section) VALUES (NOW(),"'+req.body.question_id+'","' +req.body.question+'","' +req.body.answer+'","' +req.body.img+'","' +req.body.section+'")');
+                console.log("pizza hut question");
+            
         res.send('successfully called api'); 
     });
 

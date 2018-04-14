@@ -1,8 +1,8 @@
 module.exports = {
     'connection': {
-        'host': process.env.HOST, // localde iseniz bu , local değilse ip adresini yazınız .
-        'user': process.env.USER, // kullanıcı adı 
-        'password': process.env.PASSWORD, // şifreniz 
-        'database': process.env.DATABASE // database ismi .
+        'host': process.env.HOST, 
+        'user': process.env.USER,  
+        'password': process.env.PASSWORD, 
+        'database': process.env.DATABASE 
     }
 };
