@@ -24,17 +24,18 @@ var browserRunning = setInterval(function(){
 
 // var QuestionsPage = require('../pageObjects/questionsPage');
 
-browser.url('http://tqen.mot.gov.il/safety') 
+browser.url('http://tqen.mot.gov.il/safety');
+
 
 function wait(ms){
-					   var start = new Date().getTime();
-					   var end = start;
-					   while(end < start + ms) {
-					     end = new Date().getTime();
-					  }
-					}
+	var start = new Date().getTime();
+  	var end = start;
+	while(end < start + ms) {
+	end = new Date().getTime();
+	}
+}
 
-wait(15000);
+wait(20000);
 
 var result = browser.execute(function() {
 
@@ -124,10 +125,10 @@ var result = browser.execute(function() {
 				wait(1000);
 				var questionText = list[questionCount].innerText;
 				console.log('this is the questionText',questionText);
-				var substr = questionText.substring(0, 4);
-				console.log('this is the substr',substr);
+				var question_id = questionText.substring(0, 4);
+				console.log('this is the substr',question_id);
 						
-				var correctAnswerBtn = document.getElementById('correctAnswer'+substr);
+				var correctAnswerBtn = document.getElementById('correctAnswer'+question_id);
 				console.log('this is the correctAnswerBtn', correctAnswerBtn);
 
 				answerText = correctAnswerBtn.innerText;
@@ -138,9 +139,15 @@ var result = browser.execute(function() {
 					} else {
 						var imgSrc = 'www.pizzahut.com';
 					}
-				var qAndAObj = {"question": questionText, "answer": answerText, "img": imgSrc};
+				var qAndAObj = {"question_id": question_id, "question": questionText, "answer": answerText, "img": imgSrc};
+				console.log('this is the qAndAObj', qAndAObj);
+				
+				$.post( "http://localhost:8080/api/drivingquestions", 
+				  	qAndAObj,
+						function(data) {
+					  console.log(data);
+				});
 
-				newList.push(qAndAObj);
 				var openQuestions = document.querySelectorAll("#jcemediabox-popup-page");
 				console.log(openQuestions);
 				wait(1000);
@@ -151,7 +158,8 @@ var result = browser.execute(function() {
 
 				questionCount +=1;
 				console.log('added one to questionCount', questionCount);
-				console.log(newList);
+				
+
 				if(questionCount ==5){
 					clearInterval(saveQLoop);
 				}
@@ -169,11 +177,7 @@ result.then(function (qAndAArray) {
 // // browser.end();
 
 // console.log('this is the questions and answer array', newList);
-// 			$.post( "http://localhost/api/drivingquestions", 
-// 				  { 'theQuestions': newList },
-// 				function(   data ) {
-// 				  console.log(data);
-// 			});
+			
 
 // window.location.replace("http://stackoverflow.com");
 
