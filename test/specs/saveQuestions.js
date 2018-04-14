@@ -24,7 +24,7 @@ var browserRunning = setInterval(function(){
 
 // var QuestionsPage = require('../pageObjects/questionsPage');
 
-browser.url('http://tqen.mot.gov.il/safety');
+browser.url('http://tqen.mot.gov.il/safety/vehicles-motorcycles');
 
 
 function wait(ms){
@@ -139,7 +139,7 @@ var result = browser.execute(function() {
 					} else {
 						var imgSrc = 'www.pizzahut.com';
 					}
-				var qAndAObj = {"question_id": question_id, "question": questionText, "answer": answerText, "img": imgSrc};
+				var qAndAObj = {"question_id": question_id, "question": questionText, "answer": answerText, "img": imgSrc, "section": 3};
 				console.log('this is the qAndAObj', qAndAObj);
 				
 				$.post( "http://localhost:8080/api/drivingquestions", 
