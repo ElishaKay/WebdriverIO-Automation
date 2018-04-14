@@ -22,7 +22,7 @@ var browserRunning = setInterval(function(){
 	counter++;
 }, 1000);
 
-var QuestionsPage = require('../pageObjects/questionsPage');
+// var QuestionsPage = require('../pageObjects/questionsPage');
 
 browser.url('http://tqen.mot.gov.il/safety') 
 
@@ -131,7 +131,14 @@ var result = browser.execute(function() {
 				console.log('this is the correctAnswerBtn', correctAnswerBtn);
 
 				answerText = correctAnswerBtn.innerText;
-				var qAndAObj = {"question": questionText, "answer": answerText};
+
+				var img = document.querySelector('#jsn-content-popup > div > div > div > div > img');
+					if(img){
+						var imgSrc = $(img).attr('src');						
+					} else {
+						var imgSrc = 'www.pizzahut.com';
+					}
+				var qAndAObj = {"question": questionText, "answer": answerText, "img": imgSrc};
 
 				newList.push(qAndAObj);
 				var openQuestions = document.querySelectorAll("#jcemediabox-popup-page");
