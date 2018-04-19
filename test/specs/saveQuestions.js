@@ -24,7 +24,7 @@ var browserRunning = setInterval(function(){
 
 // var QuestionsPage = require('../pageObjects/questionsPage');
 
-browser.url('http://tqen.mot.gov.il/safety/vehicles-motorcycles');
+browser.url('http://tqen.mot.gov.il/traffic-signs/vehicles-motorcycles');
 
 
 function wait(ms){
@@ -35,7 +35,7 @@ function wait(ms){
 	}
 }
 
-wait(20000);
+wait(500);
 
 var result = browser.execute(function() {
 
@@ -114,6 +114,8 @@ var result = browser.execute(function() {
 		}
 	}
 
+	wait(8000);
+
 		var questionCount = 0;
 		var list = document.getElementsByClassName("jcepopup");
 		console.log('this is the list array', list);
@@ -139,7 +141,7 @@ var result = browser.execute(function() {
 					} else {
 						var imgSrc = 'www.pizzahut.com';
 					}
-				var qAndAObj = {"question_id": question_id, "question": questionText, "answer": answerText, "img": imgSrc, "section": 3};
+				var qAndAObj = {"question_number": questionCount+1, "question_id": question_id, "question": questionText, "answer": answerText, "img": imgSrc, "section": 2};
 				console.log('this is the qAndAObj', qAndAObj);
 				
 				$.post( "http://localhost:8080/api/drivingquestions", 

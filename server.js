@@ -23,9 +23,14 @@ app.use(function(req, res, next) {
     app.post('/api/drivingquestions', function(req,res){
         console.log(req.body);
         console.log(req.body.img);
-             connection.query('INSERT INTO question (question_save_date, question_id, question, answer, img, section) VALUES (NOW(),"'+req.body.question_id+'","' +req.body.question+'","' +req.body.answer+'","' +req.body.img+'","' +req.body.section+'")');
-                console.log("pizza hut question");
-            
+
+    var qstr = 'INSERT INTO question (question_save_date, question_number, question_id, question, answer, img, section) VALUES (NOW(),"'+req.body.question_number+'","' +req.body.question_id+'","' +req.body.question+'","' +req.body.answer+'","' +req.body.img+'","' +req.body.section+'")';
+    connection.query(qstr, function(err) {
+        if (err) {
+            console.log("A wild error appeared!", err);
+        }
+    });
+
         res.send('successfully called api'); 
     });
 
