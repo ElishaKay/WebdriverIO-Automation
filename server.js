@@ -19,6 +19,17 @@ app.use(function(req, res, next) {
     });
 
 
+app.get('/', function(req, res) {
+        res.sendfile('index.html'); // load the single view file (angular will handle the page changes on the front-end)
+ });
+
+app.get('/questions',function(req,res){
+
+        connection.query('select * from question where section = 3', function (err, rows) {
+            res.json(rows);
+        });
+    });
+
     //posting the list of questions from driving-tests site 
     app.post('/api/drivingquestions', function(req,res){
         console.log(req.body);

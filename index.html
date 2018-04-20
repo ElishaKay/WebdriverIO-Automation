@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+  <meta charset="utf-8">
+  <title>Driving Questions</title>
+</head>
+<body ng-app="myApp" ng-controller="CtrlOne">
+
+  <table>
+
+  	  <thead>
+      <tr>
+        <td>
+            Section
+        </td>
+        <td>
+          Question_Number
+        </td>
+        <td>
+          Question
+        </td>
+         <td>
+          Img
+        </td>
+        <td>
+          Answer
+        </td>
+      </tr>
+    </thead>
+
+  	 <tbody>
+      <tr ng-repeat="question in questions">
+      	<td>{{ question.section }}</td>
+        <td>{{ question.question_number }}</a></td>
+        <td>{{ question.question }}</a></td>
+        <td><img ng-src="{{ question.img }}"></td>
+        <td>{{ question.answer }}</td>
+        
+      </tr>
+     </tbody>
+ </table>
+
+  <script>
+    var myApp = angular.module("myApp", []);
+    myApp.controller("CtrlOne", function ($scope, $http) {
+
+      $http.get('/questions')
+        .success(function(data){
+        $scope.questions = data;
+        console.log('These are all of the questions ',data)
+      })
+      .error(function(data){
+    });
+
+    });
+  </script>
+
+  	<style>
+  		table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #cccccc;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+	</style>
+</body>
+</html>
