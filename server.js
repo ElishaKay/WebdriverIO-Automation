@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 
 app.get('/questions',function(req,res){
 
-        connection.query('select * from question where section = 3', function (err, rows) {
+        connection.query('select * from question where section = 1 and img is null', function (err, rows) {
             res.json(rows);
         });
     });

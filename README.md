@@ -25,3 +25,9 @@ Open a new CommandPrompt/Terminal and run the below command to execute Webdriver
 
 node ./test/specs/WithoutWdioClient.js
 You should see a browser opened and navigated to google website and closed. It’s very quick.
+
+
+
+After all the questions have been fetched, run this DB Query to delete the img records that equal "www.pizzahut.com"
+
+UPDATE question SET img = null WHERE img="www.pizzahut.com"

@@ -12,18 +12,18 @@
 
   	  <thead>
       <tr>
-        <td>
+        <!-- <td>
             Section
-        </td>
+        </td> -->
         <td>
           Question_Number
         </td>
         <td>
           Question
         </td>
-         <td>
+        <!--  <td>
           Img
-        </td>
+        </td> -->
         <td>
           Answer
         </td>
@@ -32,10 +32,10 @@
 
   	 <tbody>
       <tr ng-repeat="question in questions">
-      	<td>{{ question.section }}</td>
+      	<!-- <td>{{ question.section }}</td> -->
         <td>{{ question.question_number }}</a></td>
         <td>{{ question.question }}</a></td>
-        <td><img ng-src="{{ question.img }}"></td>
+        <!-- <td><img ng-if="question.img" ng-src="{{ question.img }}"></td> -->
         <td>{{ question.answer }}</td>
         
       </tr>
@@ -68,6 +68,10 @@ td, th {
     border: 1px solid #cccccc;
     text-align: left;
     padding: 8px;
+}
+
+img {
+  width: 300px;
 }
 
 tr:nth-child(even) {
