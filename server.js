@@ -53,7 +53,6 @@ app.get('/questions',function(req,res){
         res.send('successfully called api'); 
     });
 
-var server = app.listen(port, function () {
-  var port = server.address().port;
-  console.log('Listening at port ' + port);
+server.listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + app.get('port'));
 });
