@@ -15,6 +15,7 @@
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "heroku-dotenv": "^0.4.1",
     "mysql": "^2.15.0",
     "webdriverio": "^4.12.0"
   }
