@@ -53,6 +53,11 @@ app.get('/questions',function(req,res){
         res.send('successfully called api'); 
     });
 
-server.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+ var app = require('express')();
+var http = require('http').Server(app);
+var path = require('path');
+var io = require('socket.io')(http);
+
+http.listen(process.env.PORT, '0.0.0.0', function(err) {
+    console.log('server runninng at ' + http.url );
 });
