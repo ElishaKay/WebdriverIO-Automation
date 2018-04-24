@@ -2,12 +2,11 @@
   "name": "isradrive",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "start": "node server"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
