@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // for heroku
-app.set('port', process.env.PORT || 80);
+// app.set('port', process.env.PORT || 80);
 
 
 app.set('views', __dirname + '/views');
@@ -51,4 +51,4 @@ app.get('/questions',function(req,res){
         res.send('successfully called api'); 
     });
 
-app.listen('https://israeldrivingtest.herokuapp.com/', () => console.log('Example app listening on port 80!'));
+app.listen(80, () => console.log('Example app listening on port 80!'));
