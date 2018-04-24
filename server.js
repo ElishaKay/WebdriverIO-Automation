@@ -12,11 +12,13 @@ var app = express();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
 
 app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
