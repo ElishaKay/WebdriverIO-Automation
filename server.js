@@ -6,6 +6,12 @@ var connection = mysql.createConnection(dbconfig.connection);
 var bodyParser = require('body-parser');
 var app = express();
 
+// for heroku
+app.set('port', process.env.PORT || 80);
+
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,7 +26,7 @@ app.use(function(req, res, next) {
 
 
 app.get('/', function(req, res) {
-        res.sendfile('index.html'); // load the single view file (angular will handle the page changes on the front-end)
+         res.render('index.ejs'); // load the single view file (angular will handle the page changes on the front-end)
  });
 
 app.get('/questions',function(req,res){
