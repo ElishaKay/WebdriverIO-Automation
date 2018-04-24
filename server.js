@@ -51,4 +51,7 @@ app.get('/questions',function(req,res){
         res.send('successfully called api'); 
     });
 
-app.listen(80, () => console.log('Example app listening on port 80!'));
+var server = app.listen(80, function () {
+  var port = server.address().port;
+  console.log('Listening at port ' + port);
+});
