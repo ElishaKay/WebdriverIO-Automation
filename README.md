@@ -8,6 +8,7 @@ Table of Contents for this Repo:
 - [Getting Started](#getting-started)
 - [Integrating with Webdriver IO](#integrating-with-webdriverio)
 - [Once All Data is Fetched](#once-all-data-is-fetched)
+- [Metabase API Integration](#metabase-api-integration)
 
 
 Technologies
@@ -24,12 +25,15 @@ The project includes a long list of technologies, including:
 
 <br>
 
-The Saving Process begins with the file in <a href="https://github.com/ElishaKay/scraping-the-driving-questions/tree/master/test/specs">'test/specs/saveQuestions.js'</a>
+The Saving Process begins with the file in <a href="https://github.com/ElishaKay/scraping-the-driving-questions/blob/master/test/specs/saveQuestions.js">'test/specs/saveQuestions.js'</a>
 
-Once the JavaScript code is injected into the browser (either manually or via WebdriverIO), this is the data that is logged in the Console. The QandAObject contains the question, answer, section, and image source url when available.
+Once the JavaScript code of that page is injected into the browser (either manually or via WebdriverIO), this is the data that is logged in the Console. The QandAObject contains the question, answer, section, and image source url when available.
+
+<br>
 
 <img src="qAndA.PNG">
 
+<br>
 
 Getting Started
 ---------------
@@ -88,7 +92,6 @@ restart the server each time you make a small change in code. To install, run
 `sudo npm install -g nodemon`.
 
 <br>
-<br>
 
 
 Integrating With WebdriverIO
@@ -125,9 +128,13 @@ Open a new CommandPrompt/Terminal and run the below command to execute Webdriver
 node ./test/specs/saveQuestion.js
 ```
 
-You should see a browser opened and navigating to <a href="http://tqen.mot.gov.il/know-your-vehicle/vehicles-motorcycles">the Israeli DMV Site which includes the Questions and Answers to the Driving Test. The Browser will now start sending questions
+You should see a browser opened and navigating to <a href="http://tqen.mot.gov.il/know-your-vehicle/vehicles-motorcycles">the Israeli DMV Site</a> which includes the Questions and Answers to the Driving Test. The Browser will now start sending questions to the express Server, which will then pass it on to the MySQL Database.
 
+The MySQL DB uses the Question_ID as the Primary key. Meaning, if the question_id already exists in the DB, the NodeJS Server will simply log the error and continue running (without saving the question twice).
 
+The Server Logic is located at <a href="https://github.com/ElishaKay/scraping-the-driving-questions/blob/master/server.js>"server.js</a>
+
+<br>
 
 Once All Data is Fetched
 ---------------
@@ -140,6 +147,23 @@ UPDATE question SET img = null WHERE img="www.pizzahut.com"
 ```
 
 If you'd like to display all the data you've saved in a nice format, feel free to check out this <a href="https://github.com/ElishaKay/driving-test-ebook-store">MySQL-Node-Angular Site I built to stylishly-display the driving-test study data.</a>
+
+<br>
+
+Metabase API Integration
+---------------
+
+Metabase is an Open-Source Data Visualization Platfrom that allows you to sync your Database and run and share SQL Queries in the Cloud.
+
+The results of the DB queries you write can then be shared on the public web with anybody via these convenient links.
+
+Here are some examples of the Metabase API integrated with this Repo's project (you can export data to json, csc, and xlsx).
+
+API: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"4"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
+
+Export JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/json?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"3"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
+
+Export CSV: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/csv?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"4"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
 
 
 Here are some other pages that could help you in your Data Gathering Journey:
