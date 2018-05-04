@@ -33,7 +33,7 @@ app.get('/', function(req, res) {
 
 app.get('/questions',function(req,res){
 
-        connection.query('select * from question where section = 1 and img is null', function (err, rows) {
+        connection.query('select * from question where section = 1', function (err, rows) {
             res.json(rows);
         });
     });
@@ -53,11 +53,4 @@ app.get('/questions',function(req,res){
         res.send('successfully called api'); 
     });
 
- var app = require('express')();
-var http = require('http').Server(app);
-var path = require('path');
-var io = require('socket.io')(http);
-
-http.listen(process.env.PORT, '0.0.0.0', function(err) {
-    console.log('server runninng at ' + http.url );
-});
+app.listen(3000);
