@@ -7,7 +7,7 @@ Table of Contents for this Repo:
 - [Technologies - and How It Works](#technologies)
 - [Getting Started](#getting-started)
 - [Integrating with Webdriver IO](#integrating-with-webdriverio)
-- [Once All Data is Fetched](#once-all-date-is-fetched)
+- [Once All Data is Fetched](#once-all-data-is-fetched)
 
 
 Technologies
@@ -31,11 +31,6 @@ Once the JavaScript code is injected into the browser (either manually or via We
 <img src="qAndA.PNG">
 
 
-Here are some other pages that could help you in your Data Gathering Journey:
-
-<a href="https://medium.com/@acoyfellow/mass-linkedin-request-without-3rd-party-software-dff998aedd23">Template for Social Media Automation</a>
-
-
 Getting Started
 ---------------
 
@@ -43,10 +38,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone https://github.com/ElishaKay/MySQL-Node-Angular
+git clone https://github.com/ElishaKay/scraping-the-driving-questions
 
 # Change directory
-cd MySQL-Node-Angular
+cd scraping-the-driving-questions
 
 # Install NPM dependencies
 npm install
@@ -99,6 +94,13 @@ restart the server each time you make a small change in code. To install, run
 Integrating With WebdriverIO
 ---------------
 
+Once your MySQL DB and Express Server are running (see directions directly above), you can automated the data-fetching process with WebdriverIO, an NPM Testing Library. The repo contains support for webdriverio page objects which could help you keep your DOM Selectors organized when your test becomes bigger.
+
+Because this is such a small project, we're not using WebdriverIO's page objects structure. Instead, we're using vanilla JS's setInterval function to loop through each question, open it up, and send the qAndAobject to MySQL via the jQuery .Post Command.
+
+WebdriverIO has an ExecuteJavaScript Function which injects your JS directly into the browser that it opens up for you.
+
+
 Step 1: Visit this page which shows you how to <a href="http://www.webdriverjs.com/a-basic-example-for-webdriverio-test/">install and run selenium-standalone in the background</a>
 
 Here's a Cheat Sheet of Commands for setting up Selenium Standalone Server (which will listen for commands from WebdriverIO):
@@ -119,10 +121,11 @@ selenium-standalone start
 ```
 
 Open a new CommandPrompt/Terminal and run the below command to execute WebdriverIo test.
-
+```
 node ./test/specs/saveQuestion.js
+```
 
-You should see a browser opened and navigating to <a href="http://tqen.mot.gov.il/know-your-vehicle/vehicles-motorcycles">the Israeli DMV Site which includes the Questions and Answers to the Driving Test. The Browser will now 
+You should see a browser opened and navigating to <a href="http://tqen.mot.gov.il/know-your-vehicle/vehicles-motorcycles">the Israeli DMV Site which includes the Questions and Answers to the Driving Test. The Browser will now start sending questions
 
 
 
@@ -138,3 +141,7 @@ UPDATE question SET img = null WHERE img="www.pizzahut.com"
 
 If you'd like to display all the data you've saved in a nice format, feel free to check out this <a href="https://github.com/ElishaKay/driving-test-ebook-store">MySQL-Node-Angular Site I built to stylishly-display the driving-test study data.</a>
 
+
+Here are some other pages that could help you in your Data Gathering Journey:
+
+<a href="https://medium.com/@acoyfellow/mass-linkedin-request-without-3rd-party-software-dff998aedd23">Template for Social Media Automation</a>
