@@ -132,7 +132,7 @@ You should see a browser opened and navigating to <a href="http://tqen.mot.gov.i
 
 The MySQL DB uses the Question_ID as the Primary key. Meaning, if the question_id already exists in the DB, the NodeJS Server will simply log the error and continue running (without saving the question twice).
 
-The Server Logic is located at <a href="https://github.com/ElishaKay/scraping-the-driving-questions/blob/master/server.js>"server.js</a>
+The Server Logic is located at <a href="https://github.com/ElishaKay/scraping-the-driving-questions/blob/master/server.js>">server.js</a>
 
 <br>
 
