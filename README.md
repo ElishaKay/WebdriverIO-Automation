@@ -159,11 +159,22 @@ The results of the DB queries you write can then be shared on the public web wit
 
 Here are some examples of the Metabase API integrated with this Repo's project (you can export data to json, csc, and xlsx).
 
-API: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"4"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
+API with export (export-format available json, csc, and xlsx).
 
-Export JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/json?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"3"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
+API - JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"1"}]
 
-Export CSV: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/csv?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"4"},{"type":"category","target":["variable",["template-tag","days"]],"value":"10"}]
+Export JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/json?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"3"}]
+
+Export CSV: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/csv?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"4"}]
+
+<h2>Examples with Multiple Parameters (correlated with Metabase Question Filters)</h2>
+
+API - JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"1"},{"type":"category","target":["variable",["template-tag","question_id"]],"value":"1"}]
+
+Export JSON: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/json?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"1"},{"type":"category","target":["variable",["template-tag","question_id"]],"value":"1"}]
+
+Export CSV: https://cms-dashboard.herokuapp.com/api/public/card/20a2647f-2872-4abb-8270-164711e3e6ae/query/csv?parameters=[{"type":"category","target":["variable",["template-tag","access_code"]],"value":"1"},{"type":"category","target":["variable",["template-tag","days"]],"value":"1"}]
+
 
 
 Here are some other pages that could help you in your Data Gathering Journey:
