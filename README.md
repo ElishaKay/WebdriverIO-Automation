@@ -1,6 +1,5 @@
 
-This repo contains all the code you need to get started scraping websites and saving the data to a MySQL Database.
-
+This repo contains all the code you need to test any site and, along the way, save data to a MySQL Database.
 
 Table of Contents for this Repo:
 
@@ -25,7 +24,7 @@ The project includes a long list of technologies, including:
 
 <br>
 
-The Saving Process begins with the file in <a href="https://github.com/ElishaKay/scraping-the-driving-questions/blob/master/test/specs/saveQuestions.js">'test/specs/saveQuestions.js'</a>
+The Saving Process begins with the file in <a href="https://github.com/ElishaKay/WebdriverIO-Automation/blob/master/test/specs/saveQuestions.js">'test/specs/saveQuestions.js'</a>
 
 Once the JavaScript code of that page is injected into the browser (either manually or via WebdriverIO), this is the data that is logged in the Console. The QandAObject contains the question, answer, section, and image source url when available.
 
